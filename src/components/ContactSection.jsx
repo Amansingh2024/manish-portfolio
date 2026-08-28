@@ -15,7 +15,7 @@ import {
   Building
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { personalInfo } from '../data/portfolioData';
+import { personalInfo, images } from '../data/portfolioData';
 
 export default function ContactSection() {
   const [copiedField, setCopiedField] = useState(null);
@@ -72,16 +72,16 @@ export default function ContactSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Contact Info Cards with Manish's Portrait Photo Card */}
         <div className="lg:col-span-5 space-y-4">
-          {/* Visual Profile Contact Card */}
+          {/* Visual Profile Contact Card with Photo Hover */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="p-5 rounded-3xl bg-slate-900/80 border border-cyan-500/30 backdrop-blur-xl transition-all duration-300 shadow-xl flex items-center gap-4 group"
+            className="p-5 rounded-3xl bg-slate-900/80 border border-cyan-500/30 backdrop-blur-xl transition-all duration-300 shadow-xl flex items-center gap-4 group cursor-pointer"
           >
-            <div className="w-16 h-16 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-lg shrink-0">
+            <div className="w-16 h-16 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-lg shrink-0 group-hover:shadow-[0_0_20px_#06b6d4] transition-all">
               <img
-                src={personalInfo.officePhoto || personalInfo.avatar}
+                src={images.office}
                 alt="Manish Singh Office"
-                className="w-full h-full object-cover object-top rounded-[14px] group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover object-top rounded-[14px] group-hover:scale-115 transition-transform duration-500"
               />
             </div>
             <div>

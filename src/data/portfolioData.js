@@ -1,13 +1,23 @@
+import manishPortrait from '../assets/manish-portrait.jpg';
+import manishOffice from '../assets/manish-office.jpg';
+
+export const images = {
+  portrait: manishPortrait,
+  office: manishOffice
+};
+
 export const personalInfo = {
   name: "Manish Singh",
   title: "Digital Marketing Executive & R&D Management Professional",
-  avatar: "/manish-portrait.jpg",
-  officePhoto: "/manish-office.jpg",
+  avatar: manishPortrait,
+  officePhoto: manishOffice,
   taglines: [
-    "Digital Marketing Executive (2+ Years)",
-    "R&D & Operations Specialist (1.5 Years)",
+    "Digital Marketing Executive",
+    "R&D & Operations Specialist",
     "Performance Marketer (Meta & Google Ads)",
-    "Video Editor & Creative Producer (Premiere Pro)"
+    "Video Editor & Producer (Premiere Pro)",
+    "Shopify & E-Commerce Strategist",
+    "Google Business Profile & Local SEO Lead"
   ],
   stats: [
     { label: "Digital Marketing Exp", value: "2+ Years", color: "from-cyan-400 to-blue-500" },
@@ -194,7 +204,7 @@ export const coursesList = [
   }
 ];
 
-// Single Continuous Connected Line Tree Sequence
+// Single Continuous Connected Line Tree Sequence with imported images
 export const singleLineTreeNodes = [
   {
     id: "origin-manish",
@@ -204,7 +214,7 @@ export const singleLineTreeNodes = [
     period: "2022 - Present",
     category: "origin",
     icon: "User",
-    photo: "/manish-portrait.jpg",
+    photo: manishPortrait,
     color: "#06b6d4",
     tag: "Root Origin",
     badgeText: "3.5+ Yrs Exp",

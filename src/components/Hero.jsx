@@ -15,20 +15,55 @@ import {
   Play,
   Share2,
   Briefcase,
-  Eye
+  Eye,
+  Terminal
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import IconRenderer from './IconRenderer';
 
 export default function Hero() {
-  const [taglineIndex, setTaglineIndex] = useState(0);
+  const words = [
+    "Digital Marketing Executive",
+    "R&D & Operations Specialist",
+    "Performance Marketer (Meta & Google Ads)",
+    "Video Editor & Producer (Premiere Pro)",
+    "Shopify & E-Commerce Strategist",
+    "Google Business Profile & Local SEO Lead"
+  ];
+
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(90);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTaglineIndex((prev) => (prev + 1) % personalInfo.taglines.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    const fullWord = words[currentWordIndex];
+
+    const handleTyping = () => {
+      if (!isDeleting) {
+        // Typing forward
+        setCurrentText(fullWord.substring(0, currentText.length + 1));
+        setTypingSpeed(80);
+
+        if (currentText === fullWord) {
+          // Finished typing word, pause before deleting
+          setTimeout(() => setIsDeleting(true), 1800);
+        }
+      } else {
+        // Deleting backward
+        setCurrentText(fullWord.substring(0, currentText.length - 1));
+        setTypingSpeed(40);
+
+        if (currentText === '') {
+          setIsDeleting(false);
+          setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentWordIndex, typingSpeed, words]);
 
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
@@ -54,7 +89,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* Main Headline with Live Character-by-Character Typewriter */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,14 +100,17 @@ export default function Hero() {
               Hi, I'm <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">Manish Singh</span>
             </h1>
 
-            {/* Dynamic Rotating Tagline */}
-            <div className="h-10 flex items-center">
-              <span className="text-base sm:text-xl md:text-2xl font-bold text-slate-300 font-mono flex items-center gap-2">
-                <span className="text-cyan-400">❯</span>
-                <span className="text-cyan-300">
-                  {personalInfo.taglines[taglineIndex]}
+            {/* REAL TYPEWRITER EFFECT WITH BLINKING CURSOR */}
+            <div className="min-h-[44px] sm:min-h-[52px] flex items-center">
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-slate-900/90 border border-cyan-500/30 shadow-inner backdrop-blur-md">
+                <span className="text-cyan-400 font-mono text-base sm:text-xl font-bold select-none">
+                  ❯
                 </span>
-              </span>
+                <span className="text-base sm:text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-teal-200 to-indigo-300 font-mono">
+                  {currentText}
+                </span>
+                <span className="w-2.5 h-6 bg-cyan-400 rounded-sm animate-pulse shadow-[0_0_10px_#06b6d4]" />
+              </div>
             </div>
           </motion.div>
 
